@@ -1,33 +1,4 @@
 $(function() {
-    // var collections={};
-
-    // var deferredHotels = $.ajax({
-    //     method: 'get',
-    //     url: '/api/hotels'
-    // });
-
-    // var deferredRestaurants = $.ajax({
-    //     method: 'get',
-    //     url: '/api/restaurants'
-    // });
-
-    // var deferredActivites = $.ajax({
-    //     method: 'get',
-    //     url: '/api/activities'
-    // });
-
-
-    // $.when(deferredHotels, deferredRestaurants,deferredActivites)
-    // .done(function(hotels,restaurants,activities){
-    //     collections['hotel'] = hotels[0];
-    //     collections['restaurant'] = restaurants[0];
-    //     collections['activity'] = activities[0];
-    // })
-    // .fail();
-
-    // console.log(collections);
-
-
 
     var map = initializeMap();
     var $addItemButton = $('#options-panel').find('button');
@@ -71,9 +42,9 @@ $(function() {
         var $select = $this.siblings('select');
         var sectionName = $select.attr('data-type');
         var getValue = '';
-        if (sectionName === 'hotel') getValue = 'hotels';
-        if (sectionName === 'restaurant') getValue = 'restaurants';
-        if (sectionName === 'activity') getValue = 'activities';
+        if (sectionName === 'hotel') getValue = 'Hotel';
+        if (sectionName === 'restaurant') getValue = 'Restaurant';
+        if (sectionName === 'activity') getValue = 'Activity';
         var itemId = parseInt($select.val(), 10);
         var collectionQuery = $.get('api/' + getValue + '?id=' + itemId).done(function(result) {
                 console.log(result);
@@ -112,13 +83,15 @@ $(function() {
 
     });
 
-    $addDayButton.on('click', function() {
+    $addDayButton.on('click', function() {        
         var newDayNum = days.length + 1;
         var $newDayButton = createDayButton(newDayNum);
         days.push([]);
         $addDayButton.before($newDayButton);
         switchDay(newDayNum);
     });
+
+
 
     $dayButtonList.on('click', '.day-btn', function() {
         var dayNumberFromButton = parseInt($(this).text(), 10);
@@ -139,9 +112,9 @@ $(function() {
 
     });
 
-    fillInOptions('hotels', $('#hotel-choices'));
-    fillInOptions('restaurants', $('#restaurant-choices'));
-    fillInOptions('activities', $('#activity-choices'));
+    fillInOptions('Hotel', $('#hotel-choices'));
+    fillInOptions('Restaurant', $('#restaurant-choices'));
+    fillInOptions('Activity', $('#activity-choices'));
 
     /*
     --------------------------

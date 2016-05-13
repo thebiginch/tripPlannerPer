@@ -6,26 +6,23 @@ var Restaurant = require('../../models/restaurant');
 var Activity = require('../../models/activity');
 var attractionRouter = express.Router();
 
-
-// attractionRouter.get('/',function(req,res){
-
-// 	console.log('hello');
-// 	res.send('working');
-
-// });
+var modelRef = {
+    Restaurant: Restaurant,
+    Hotel: Hotel,
+    Place: Place,
+    Activity: Activity,
+   // day: Day
+}
 
 
 // THESE ARE API ROUTES
 
-// api/hotels?id=1
-// => Hotel.findOne({where: id = 1})
+attractionRouter.get('/:attraction', function(req, res, next) {
 
-
-attractionRouter.get('/hotels', function(req, res, next) {
-
-	var findOptions = {include: [Place]}
-	if(req.query) findOptions.where = req.query;
-    Hotel.findAll(findOptions)
+    var findOptions = {include: [Place]}
+    var attraction = req.params.attraction;
+    if(req.query) findOptions.where = req.query;
+    modelRef[attraction].findAll(findOptions)
         .then(function(hotels) {
             res.json(hotels);
         }).
@@ -33,27 +30,41 @@ attractionRouter.get('/hotels', function(req, res, next) {
 
 });
 
-attractionRouter.get('/restaurants', function(req, res, next) {
 
-	var findOptions = {include: [Place]}
-	if(req.query) findOptions.where = req.query;
-    Restaurant.findAll(findOptions)
-        .then(function(restaurants) {
-            res.json(restaurants);
-        })
-        .catch(next);
-});
 
-attractionRouter.get('/activities', function(req, res, next) {
+// attractionRouter.get('/hotels', function(req, res, next) {
+
+// 	var findOptions = {include: [Place]}
+// 	if(req.query) findOptions.where = req.query;
+//     Hotel.findAll(findOptions)
+//         .then(function(hotels) {
+//             res.json(hotels);
+//         }).
+//     catch(next);
+
+// });
+
+// attractionRouter.get('/restaurants', function(req, res, next) {
+
+// 	var findOptions = {include: [Place]}
+// 	if(req.query) findOptions.where = req.query;
+//     Restaurant.findAll(findOptions)
+//         .then(function(restaurants) {
+//             res.json(restaurants);
+//         })
+//         .catch(next);
+// });
+
+// attractionRouter.get('/activities', function(req, res, next) {
 	
-	var findOptions = {include: [Place]}
-	if(req.query) findOptions.where = req.query;
-    Activity.findAll(findOptions)
-        .then(function(activities) {
-            res.json(activities);
-        })
-        .catch(next);
-});
+// 	var findOptions = {include: [Place]}
+// 	if(req.query) findOptions.where = req.query;
+//     Activity.findAll(findOptions)
+//         .then(function(activities) {
+//             res.json(activities);
+//         })
+//         .catch(next);
+// });
 
 
 module.exports = attractionRouter;

@@ -14,6 +14,42 @@ var Day = db.define('day', {
     day: {
         type: Sequelize.INTEGER,
     },
+
+}, {
+    classMethods: {
+        //takes a day num and for all rows in Day model with day > dayNum, decrements the day num by 1
+        updateDays: function(dayNum) {
+
+            return this.findAll({
+                    where: {
+                        day: { $gt: dayNum }
+                    }
+                })
+                .then(function(results) {
+                    
+                    var resultMap = results.map(function(dayRow) {
+                        return  dayRow.decrementDay();
+                    });
+
+                    return Promise.all(resultMap);
+                })
+                .then(function(updateDayRows){
+
+                    return updateDayRows;
+
+                })
+                .catch();
+
+
+        }
+    },
+
+    instanceMethods: {
+        decrementDay: function() {
+            this.setDataValue('day', this.getDataValue('day') - 1)
+            return this.save();
+        }
+    }
 });
 
 
