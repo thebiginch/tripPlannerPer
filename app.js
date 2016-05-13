@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/public'));
 
 // serve dynamic routes
 app.use(require('./routes'));
-
+app.use('/api/day', require('./routes/api/days'));
 app.use('/api',require('./routes/api/attractions'));
 
 
