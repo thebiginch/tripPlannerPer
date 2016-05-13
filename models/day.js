@@ -10,8 +10,12 @@ var db = require('./_db');
 //   amenities: Sequelize.STRING
 // });
 
-var Day = db.define('day', {});
+var Day = db.define('day', {
+    day: {
+        type: Sequelize.INTEGER,
+    },
+});
 
 
 
-module.exports = Hotel;
+module.exports = Day;

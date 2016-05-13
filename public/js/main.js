@@ -152,15 +152,12 @@ $(function() {
     // Create element functions ----
 
     function create$item(item) {
-
         var $div = $('<div />');
         var $span = $('<span />').text(item.name);
         var $removeButton = $('<button class="btn btn-xs btn-danger remove btn-circle">x</button>');
 
         $div.append($span).append($removeButton);
-
         return $div;
-
     }
 
     function createDayButton(number) {
@@ -203,7 +200,6 @@ $(function() {
             $listToAddTo.append(create$item(attraction.item));
             attraction.marker.setMap(map);
         });
-
     }
 
     function wipeDay() {
