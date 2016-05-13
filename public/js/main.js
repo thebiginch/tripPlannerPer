@@ -83,7 +83,12 @@ $(function() {
 
     });
 
-    $addDayButton.on('click', function() {        
+    $addDayButton.on('click', function() {   
+
+        var currentDay = $('.day-buttons').children().length
+
+        $.post('./api/day/' + currentDay);
+
         var newDayNum = days.length + 1;
         var $newDayButton = createDayButton(newDayNum);
         days.push([]);
